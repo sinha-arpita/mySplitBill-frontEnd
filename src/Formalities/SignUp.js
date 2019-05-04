@@ -1,0 +1,66 @@
+import React from "react"
+import axios from "axios";
+
+class SignUp extends React.Component{
+  state={
+
+    username:"",
+    password:"",
+    phone:null,
+    email:""
+
+
+  }
+
+  inputHandler=(event)=>{
+     this.setState({[event.target.name]:event.target.value})
+
+  }
+  submitHandler=(event)=>{
+
+    const endpoint="http://localhost:9090/api/auth/register"
+    axios.post(endpoint,this.state)
+    console.log("REGISTER",endpoint,this.state)
+       .then(res=>{
+           console.log("Register response",res)
+           localStorage.setItem('jwt',res.data.token)
+       })
+       .catch(err=>{
+           console.log("thec error is ",err)
+       })
+  }
+
+  render(){
+      return(
+        <>
+         <form className="form" onSubmit={this.submitHandler}>
+           <input type="text" placeholder="username" name="username"value={this.state.username}
+            onChange={this.inputHandler}/>
+
+          <input type="password" placeholder="password" name="password"value={this.state.password}
+            onChange={this.inputHandler}/>
+            <input type="phone" placeholder="phone" name="phone"value={this.state.phone}
+            onChange={this.inputHandler}/>
+            <input type="email" placeholder="email" name="email"value={this.state.email}
+            onChange={this.inputHandler}/>
+         
+         
+         
+         
+         <button type="submit">SignUp</button>
+         
+         
+         
+         </form>
+
+
+        </>
+
+      )
+  }
+ 
+}
+
+export default SignUp
+
+

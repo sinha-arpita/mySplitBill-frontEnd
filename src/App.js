@@ -37,6 +37,10 @@ class App extends Component {
       });
   };
 
+  eventCreated = () => {
+    this.setState({});
+  }
+
   render() {
     if (this.state.signedInUser) {
       return (
@@ -45,9 +49,8 @@ class App extends Component {
          <h3>Welcome {this.state.signedInUser}!</h3>
          <button onClick ={this.logoutHandler} >Logout</button>
           <hr />
-          <h1 className="dash">MY DASHBOARD</h1>
           <main className="main">
-            <Dashbaord />
+            <Dashbaord  eventCreated={this.eventCreated} />
 
             <Notifications />
 
@@ -75,9 +78,20 @@ class App extends Component {
               exact path="/signin" render={props => (<SignIn {...props} userSignedIn={this.userSignedIn} /> )} />
            
           </main> */}
-          <SignIn />
-          <SignUp />
+          
+          <header className="main"> 
+              <h1 className="header"> SPLIT-THE-BILLS</h1>  
+          </header>
+
+          <div className="log">
+          
+            
+          
+            <SignIn userSignedIn={this.userSignedIn}/>
+            <SignUp/>
+          </div>
         </div>
+        
       );
     }
   }

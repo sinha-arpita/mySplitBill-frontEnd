@@ -65,7 +65,9 @@ class EventsForm extends React.Component {
       total_expenditure: this.state.total_expenditure,
       date: this.state.date,
       paid_by: this.state.paid_by,
-      participants: this.state.participants ? this.state.participants.split(",") : []
+      participants: this.state.participants
+        ? this.state.participants.split(",")
+        : []
     };
 
     // For testing :
@@ -88,14 +90,14 @@ class EventsForm extends React.Component {
     //     console.log("thec error is ", err);
     //   });
 
-    const headers = { 
-                  'Content-Type': 'application/json',
-                  authorization: localStorage.getItem("jwt") 
-                };
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: localStorage.getItem("jwt")
+    };
 
     const endpoint = "http://localhost:9090/api/events";
     axios
-      .post(endpoint,  newEvent , {headers:headers})
+      .post(endpoint, newEvent, { headers: headers })
       .then(res => {
         console.log("Get RESPONSE", res);
         this.setState({ users: res.data });
@@ -116,13 +118,14 @@ class EventsForm extends React.Component {
       paid_by: "",
       particiants: []
     });
+
+    this.props.eventCreated();
   };
 
   render() {
     console.log(this.state.selectedUser);
     return (
       <form className="myForm">
-       
         <input
           type="text"
           name="event_name"
@@ -131,7 +134,7 @@ class EventsForm extends React.Component {
           onChange={this.changeHandler}
           className="EventName"
         />
-        <br/>
+        <br />
         <input
           type="text"
           name="event_description"
@@ -140,7 +143,7 @@ class EventsForm extends React.Component {
           onChange={this.changeHandler}
           className="EventName"
         />
-        <br/>
+        <br />
         <input
           type="text"
           name="date"
@@ -149,7 +152,7 @@ class EventsForm extends React.Component {
           onChange={this.changeHandler}
           className="EventName"
         />
-        <br/>
+        <br />
         <input
           type="text"
           name="total_expenditure"
@@ -158,7 +161,7 @@ class EventsForm extends React.Component {
           onChange={this.changeHandler}
           className="EventName"
         />
-        <br/>
+        <br />
         {/* <input
           type="text"
           name="Paid BY:"
@@ -198,35 +201,33 @@ class EventsForm extends React.Component {
             )}
           </DropdownMenu>
         </Dropdown> */}
-        <br/>
+        <br />
 
-        
-          <h4>PaidBy</h4>
-          <div>
-            
-            <input
-              type="text"
-              name="paid_by"
-              value={this.state.paid_by}
-              placeholder="Paid by"
-              onChange={this.changeHandler}
-              className="EventName"
-            />
-          </div>
-        
-        <br/>
+        <h4>PaidBy</h4>
+        <div>
+          <input
+            type="text"
+            name="paid_by"
+            value={this.state.paid_by}
+            placeholder="Paid by"
+            onChange={this.changeHandler}
+            className="EventName"
+          />
+        </div>
+
+        <br />
         <h4>Participants</h4>
         <textarea
           type="text"
-          cols="10"
-          rows="6"
+          cols="50"
+          rows="10"
           name="participants"
-          placeholder="Participants"
+          placeholder="Participants, comma separated..."
           value={this.state.textBody}
           onChange={this.changeHandler}
           className="participants"
         />
-        <br/>
+        <br />
         <button className="submitButton" onClick={this.clickHandler}>
           Submit
         </button>

@@ -30,11 +30,14 @@ class Dashboard extends React.Component {
       });
   }
 
+  eventCreated = () => {
+    this.props.eventCreated();
+  }
   render() {
     return (
       <div className="dashboard">
        <h1 className= "new"> Create New Events </h1>
-        <EventsForm users={this.state.users} />
+        <EventsForm users={this.state.users} eventCreated={this.eventCreated}/>
       </div>
     );
   }

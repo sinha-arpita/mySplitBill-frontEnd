@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import "./sign.css";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -31,23 +32,27 @@ class SignIn extends React.Component {
   render() {
     return (
       <>
+       
         <form className="form" onSubmit={this.submitHandler}>
-          <input
+          <input className="inside"
             type="text"
             placeholder="username"
             name="username"
             value={this.state.username}
             onChange={this.inputHandler}
           />
+          <br />
+          <br />
 
-          <input
+          <input className="inside"
             type="password"
             placeholder="password"
             name="password"
             value={this.state.password}
             onChange={this.inputHandler}
           />
-
+          <br />
+          <br />
           <button type="submit">SignIn</button>
         </form>
       </>
